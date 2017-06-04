@@ -1,0 +1,29 @@
+.cmpTitle, adTitle {
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+.cmpType {
+  color: #8c8c8c;
+  margin: 0 5px;
+}
+
+.adMatches {
+  color: #c2bcbc;
+  font-size: 12px;
+}
+
+.adsCollapse {
+  border: 2px solid #56688b;
+  margin-bottom: 5px;
+}
+
+.adTitle {
+  background: #56688b;
+  color: #fff;
+  padding: 5px 10px;
+}
+
+.adContentContainer {
+  padding: 10px 20px;
+}
