@@ -1,92 +1,93 @@
-import React, { Component } from 'react';
-import Collapsible from 'react-collapsible';
+import React, { Component } from "react";
+import Collapsible from "react-collapsible";
 import {
   FaAngleRight,
   FaAngleDown,
   FaPencil,
   FaPlusCircle
-} from 'react-icons/lib/fa/';
+} from "react-icons/lib/fa/";
 
-import CreateNewAd from './CreateNewAd';
-import './style.css';
+import CreateNewAd from "./CreateNewAd";
+import { Personas } from "./personas";
+import "./style.css";
 
 const campaigns = [
   {
-    name: 'Facebook', // campaign 1
+    name: "Facebook", // campaign 1
     ads: []
   },
 
   {
-    name: 'Magazine Print', // campaign 2
+    name: "Magazine Print", // campaign 2
     ads: [
       {
-        name: 'GQ Mag Spring', // ad 1
+        name: "GQ Mag Spring", // ad 1
         scores: [46, 75],
         personas: []
       },
       {
-        name: 'Vogue Mag Spring', // ad 2
+        name: "Vogue Mag Spring", // ad 2
         scores: [56, 87],
         personas: [
           {
-            name: '[[Doug - At Home Writer|||personas/121212]]',
+            name: "[[Doug - At Home Writer|||personas/121212]]",
             scores: [
-              { score: 42, text: '####% overall' },
+              { score: 42, text: "####% overall" },
               {
                 score: 81,
-                text: '####% top topic [[Coffeehouse Enlightenment|||boards/123456]]'
+                text: "####% top topic [[Coffeehouse Enlightenment|||boards/123456]]"
               }
             ]
           },
           {
-            name: '[[David - Marketing Celebrity|||personas/232323]]',
+            name: "[[David - Marketing Celebrity|||personas/232323]]",
             scores: [
-              { score: 68, text: '####% overall' },
+              { score: 68, text: "####% overall" },
               {
                 score: 72,
-                text: '####% top topic [[Buyer Personas|||boards/234567]]'
+                text: "####% top topic [[Buyer Personas|||boards/234567]]"
               }
             ]
           },
           {
-            name: '[[Ellen - Design Trendsetter|||personas/343434]]',
+            name: "[[Ellen - Design Trendsetter|||personas/343434]]",
             scores: [
-              { score: 48, text: '####% overall' },
+              { score: 48, text: "####% overall" },
               {
                 score: 90,
-                text: '####% top topic [[Art Exhibits|||boards/345678]]'
+                text: "####% top topic [[Art Exhibits|||boards/345678]]"
               }
             ]
           },
           {
-            name: '[[Steve - Gamer Tech Guy|||personas/454545]]',
+            name: "[[Steve - Gamer Tech Guy|||personas/454545]]",
             scores: [
-              { score: 35, text: '####% overall' },
+              { score: 35, text: "####% overall" },
               {
                 score: 52,
-                text: '####% top topic [[Video Cards|||boards/456789]]'
+                text: "####% top topic [[Video Cards|||boards/456789]]"
               }
             ]
           },
           {
-            name: '[[Leslie - Grad at First Job|||personas/676767]]',
+            name: "[[Leslie - Grad at First Job|||personas/676767]]",
             scores: [
-              { score: 75, text: '####% overall' },
+              { score: 75, text: "####% overall" },
               {
                 score: 85,
-                text: '####% top topic [[Small Apartment Living|||boards/567890]]'
+                text: "####% top topic [[Small Apartment Living|||boards/567890]]"
               }
             ]
           }
         ]
       },
       {
-        name: 'Time Mag Spring', // ad 3
+        name: "Time Mag Spring", // ad 3
         scores: [62, 83],
         personas: []
       },
       {
-        name: 'Wired Mag Spring', // ad 4
+        name: "Wired Mag Spring", // ad 4
         scores: [66, 74],
         personas: []
       },
@@ -99,17 +100,17 @@ const campaigns = [
   },
 
   {
-    name: 'TV primetime spots', // campaign 3
+    name: "TV primetime spots", // campaign 3
     ads: []
   },
 
   {
-    name: 'TV sports spots', // campaign 4
+    name: "TV sports spots", // campaign 4
     ads: []
   },
 
   {
-    name: 'TV movie spots', // campaign 5
+    name: "TV movie spots", // campaign 5
     ads: []
   }
 ];
@@ -126,9 +127,9 @@ export default class Campaign extends Component {
       <div className="campaignTitle">
         <FaAngleRight />
         <span className="cmpTitle">{cmp.name}</span>
-        {' '}
+        {" "}
         <span className="cmpType">campaign.</span>
-        {' '}
+        {" "}
         <span className="editCampaign"><FaPencil /></span>
       </div>
     );
@@ -139,8 +140,23 @@ export default class Campaign extends Component {
         <Collapsible
           key={ad.name}
           trigger={this.adsTitle(ad)}
-          classParentString="adsCollapse">
-          <div className="adContentContainer">List of Ads</div>
+          classParentString="adsCollapse"
+        >
+          <div className="adContentContainer">
+            List of Ads
+            <p>
+              Personas
+              {" "}
+              <span><FaPlusCircle onClick={this.handlePersonasClick} /></span>
+            </p>
+            {this.state.personasShow
+              ? <Personas
+                  showModal={this.state.open}
+                  hideModal={this.hideModal}
+                  personas={ads}
+                />
+              : null}
+          </div>
         </Collapsible>
       );
     });
@@ -152,7 +168,7 @@ export default class Campaign extends Component {
         <FaAngleRight />
         <span className="adTitle">{ad.name}</span>
         <span className="adMatches">ad matches</span>
-        {' '}
+        {" "}
         <span className="editCampaign"><FaPencil /></span>
       </div>
     );
@@ -171,7 +187,8 @@ export default class Campaign extends Component {
         <Collapsible
           key={campaign.name}
           trigger={this.campaignTitle(campaign)}
-          classParentString="campaignsCollapse">
+          classParentString="campaignsCollapse"
+        >
           <div className="Ads">
             <span className="cmpTitle">Ads</span>
             <span className="editCampaign">
@@ -181,13 +198,12 @@ export default class Campaign extends Component {
           <div className="AdsList">
             {this.state.adsShow
               ? <CreateNewAd
-                personasClick={this.handlePersonasClick}
-                personasShow={this.state.personasShow}
-                hideModal={this.hideModal}
-                showModal={this.state.open}
-                personas={campaign.ads}
+                  personasShow={this.state.personasShow}
+                  hideModal={this.hideModal}
+                  showModal={this.state.open}
+                  personas={campaign.ads}
                 />
-            : null}
+              : null}
             {this.renderAdLists(campaign.ads)}
           </div>
         </Collapsible>
@@ -196,7 +212,7 @@ export default class Campaign extends Component {
   };
   render() {
     return (
-      <div style={{ padding: '10px 20px' }}>
+      <div style={{ padding: "10px 20px" }}>
         <h3>Campaigns</h3>
         <div className="campaignsContainer">
           {this.renderCampaigns()}
