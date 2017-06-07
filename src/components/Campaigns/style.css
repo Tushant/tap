@@ -22,8 +22,23 @@
   background: #56688b;
   color: #fff;
   padding: 5px 10px;
+  align-items: center;
 }
 
 .adContentContainer {
   padding: 10px 20px;
+}
+
+.adTitleInput input {
+  margin: 0 auto;
+  background: transparent;
+  border: 0;
+  box-shadow: 0;
+}
+
+.adTitleInput input:focus {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: #fff;
 }
